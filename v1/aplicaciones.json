@@ -25,11 +25,11 @@
     },
     {
       "id": "upgrades",
-      "nombre": "Upgrades",
-      "descripcion": "Espacios de trabajo para migrar bases de Odoo de versión",
-      "url": "https://upgrades.ganemo.co/",
+      "nombre": "Hangar",
+      "descripcion": "Upgrades, soporte y desarrollo: espacios de trabajo en el navegador",
+      "url": "https://hangar.ganemo.co/",
       "color": "#1a7f37",
-      "inicial": "U",
+      "inicial": "H",
       "visibilidad": "personal",
       "orden": 30
     }

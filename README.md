@@ -1,7 +1,7 @@
 # menu-aplicaciones — lista única del menú de aplicaciones de Ganemo
 
 Fuente única de las aplicaciones que aparecen en el **menú de 9 puntos** de las apps internas de Ganemo
-(Jenkins, Coder/Upgrades y las que vengan).
+(Jenkins, Hangar (Coder) y las que vengan).
 
 - **Lista publicada:** `https://ganemo-infra.github.io/menu-aplicaciones/v1/aplicaciones.json`
   (GitHub Pages: CDN, CORS abierto `Access-Control-Allow-Origin: *`, caché de 10 min).
