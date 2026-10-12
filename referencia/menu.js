@@ -144,10 +144,10 @@
     });
     panel.appendChild(grilla);
 
-    function abrir(si, devolverFoco) {
+    function abrir(si, devolverFoco, conTeclado) {
       panel.hidden = !si;
       boton.setAttribute("aria-expanded", si ? "true" : "false");
-      if (si) {
+      if (si && conTeclado) {
         var primero = panel.querySelector("a");
         if (primero) primero.focus();
       } else if (devolverFoco) {
@@ -156,7 +156,7 @@
     }
     boton.addEventListener("click", function (e) {
       e.stopPropagation();
-      abrir(panel.hidden, false);
+      abrir(panel.hidden, false, e.detail === 0); // detail 0 = abierto con teclado: el foco pasa al panel
     });
     document.addEventListener("click", function (e) {
       if (!panel.hidden && !cont.contains(e.target)) abrir(false, false);
