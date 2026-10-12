@@ -92,15 +92,15 @@
       });
   }
 
-  /** Aplica las reglas del contrato: https, visibilidad, orden. */
-  function filtrar(datos, correo) {
+  /** Aplica las reglas del contrato: https, visibilidad (la app actual siempre cuenta), orden. */
+  function filtrar(datos, correo, appId) {
     var c = String(correo || "").toLowerCase();
     var dominio = c.slice(c.lastIndexOf("@") + 1);
     var interno = c.indexOf("@") > 0 && (datos.dominiosInternos || []).indexOf(dominio) >= 0;
     return datos.apps
       .filter(function (a) {
         return a && a.id && a.nombre && /^https:\/\/[^\s"'<>]+$/.test(a.url) &&
-          (a.visibilidad === "todos" || (a.visibilidad === "personal" && interno));
+          (a.id === appId || a.visibilidad === "todos" || (a.visibilidad === "personal" && interno));
       })
       .sort(function (x, y) { return (x.orden || 0) - (y.orden || 0); });
   }
@@ -178,7 +178,7 @@
     if (!op.correo) return Promise.resolve(null);
     return obtenerLista(op.urlLista, op.respaldo).then(function (datos) {
       if (!datos) return null;
-      var apps = filtrar(datos, op.correo);
+      var apps = filtrar(datos, op.correo, op.appId);
       if (apps.length < 2) return null;
       var cont = construir(apps, op.appId);
       if (op.contenedor) {
