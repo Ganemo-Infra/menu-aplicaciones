@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "actualizado": "2026-10-12",
+  "dominiosInternos": ["ganemo.co", "ganemo.com"],
+  "apps": [
+    {
+      "id": "dashboards",
+      "nombre": "Dashboards",
+      "descripcion": "Tableros con IA sobre tus datos de Odoo",
+      "url": "https://dashboards.ganemo.com/",
+      "color": "#1f6feb",
+      "inicial": "D",
+      "visibilidad": "personal",
+      "orden": 10
+    },
+    {
+      "id": "jenkins",
+      "nombre": "CI/CD",
+      "descripcion": "Tareas programadas, procesos y despliegues",
+      "url": "https://jenkins-prod.ganemo.co/",
+      "color": "#c0392b",
+      "inicial": "C",
+      "visibilidad": "todos",
+      "orden": 20
+    },
+    {
+      "id": "upgrades",
+      "nombre": "Upgrades",
+      "descripcion": "Espacios de trabajo para migrar bases de Odoo de versión",
+      "url": "https://upgrades.ganemo.co/",
+      "color": "#1a7f37",
+      "inicial": "U",
+      "visibilidad": "personal",
+      "orden": 30
+    }
+  ]
+}

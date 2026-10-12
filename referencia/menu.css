@@ -1,0 +1,55 @@
+/* Menú de aplicaciones de Ganemo — estilos de referencia. Las variables --ganemo-menu-* se pueden redefinir en la
+   app para casar con su tema; los valores por defecto siguen el tema claro/oscuro del sistema. */
+.ganemo-lanzador {
+  --ganemo-menu-fondo: #ffffff; --ganemo-menu-texto: #1b2330; --ganemo-menu-tenue: #5d6875;
+  --ganemo-menu-borde: #e2e6eb; --ganemo-menu-hover: #f5f6f8; --ganemo-menu-foco: #1f6feb;
+  position: relative; display: flex; align-items: center; font-family: inherit;
+}
+@media (prefers-color-scheme: dark) {
+  .ganemo-lanzador {
+    --ganemo-menu-fondo: #16181d; --ganemo-menu-texto: #f2f4f7; --ganemo-menu-tenue: #a3abb6;
+    --ganemo-menu-borde: #2b2f36; --ganemo-menu-hover: #20242b; --ganemo-menu-foco: #58a6ff;
+  }
+}
+.ganemo-lanzador.flotante { position: fixed; right: 16px; bottom: 16px; z-index: 1000; }
+.ganemo-lanzador-boton {
+  display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; padding: 0;
+  border: 0; border-radius: 8px; background: transparent; color: var(--ganemo-menu-texto); cursor: pointer;
+}
+.ganemo-lanzador.flotante .ganemo-lanzador-boton {
+  background: var(--ganemo-menu-fondo); border: 1px solid var(--ganemo-menu-borde);
+  box-shadow: 0 4px 12px rgb(0 0 0 / 15%);
+}
+.ganemo-lanzador-boton:hover, .ganemo-lanzador-boton[aria-expanded="true"] { background: var(--ganemo-menu-hover); }
+.ganemo-lanzador-boton:focus-visible, .ganemo-lanzador-app:focus-visible {
+  outline: 2px solid var(--ganemo-menu-foco); outline-offset: 2px;
+}
+.ganemo-lanzador-panel {
+  position: absolute; right: 0; top: calc(100% + 6px); z-index: 1000;
+  width: 280px; max-width: calc(100vw - 32px); box-sizing: border-box; padding: 14px;
+  background: var(--ganemo-menu-fondo); color: var(--ganemo-menu-texto);
+  border: 1px solid var(--ganemo-menu-borde); border-radius: 14px; box-shadow: 0 10px 30px rgb(0 0 0 / 15%);
+  line-height: normal; text-align: left;
+}
+.ganemo-lanzador.flotante .ganemo-lanzador-panel { top: auto; bottom: calc(100% + 6px); }
+.ganemo-lanzador-panel[hidden] { display: none; }
+.ganemo-lanzador-titulo { font-size: 13px; color: var(--ganemo-menu-tenue); margin: 0 4px 10px; }
+.ganemo-lanzador-grilla { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+.ganemo-lanzador-app {
+  display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 10px 4px; border-radius: 10px;
+  min-height: 44px; color: var(--ganemo-menu-texto) !important; text-decoration: none !important;
+  font-size: 13px; text-align: center; word-break: break-word;
+}
+.ganemo-lanzador-app:hover { background: var(--ganemo-menu-hover); }
+.ganemo-lanzador-app.actual { background: color-mix(in srgb, #1f6feb 12%, transparent); font-weight: 600; }
+.ganemo-lanzador-icono {
+  width: 40px; height: 40px; border-radius: 10px; display: grid; place-items: center; color: #fff;
+  font-weight: 600; font-size: 18px; background: #5d6875;
+}
+@media (max-width: 480px) {
+  .ganemo-lanzador-panel { position: fixed; left: 16px; right: 16px; top: 56px; width: auto; max-width: none; }
+  .ganemo-lanzador.flotante .ganemo-lanzador-panel { top: auto; bottom: 64px; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .ganemo-lanzador-app { transition: background-color .12s ease; }
+}

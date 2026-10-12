@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Menú de aplicaciones de Ganemo</title>
+<link rel="stylesheet" href="referencia/menu.css">
+<style>
+  body { font: 15px/1.5 system-ui, sans-serif; margin: 0; background: #fff; color: #1b2330; }
+  @media (prefers-color-scheme: dark) { body { background: #0e1014; color: #f2f4f7; } }
+  header { display: flex; align-items: center; justify-content: space-between; padding: 8px 16px;
+    border-bottom: 1px solid #8884; }
+  main { max-width: 720px; margin: 0 auto; padding: 16px; }
+  code { word-break: break-all; }
+</style>
+</head>
+<body>
+<header><strong>Demostración</strong><div id="barra"></div></header>
+<main>
+  <p>Lista canónica del menú de aplicaciones de Ganemo: <a href="v1/aplicaciones.json"><code>v1/aplicaciones.json</code></a>
+    (contrato: <a href="v1/esquema.json"><code>v1/esquema.json</code></a>). Implementación de referencia:
+    <a href="referencia/menu.js"><code>referencia/menu.js</code></a> y <a href="referencia/menu.css"><code>referencia/menu.css</code></a>.</p>
+  <p>Esta página simula a alguien del personal (<code>demo@ganemo.co</code>) dentro de «CI/CD».</p>
+</main>
+<script src="referencia/menu.js"></script>
+<script>
+  GanemoMenu.montar({ contenedor: document.getElementById("barra"), correo: "demo@ganemo.co", appId: "jenkins",
+    urlLista: "v1/aplicaciones.json" });
+</script>
+</body>
+</html>
