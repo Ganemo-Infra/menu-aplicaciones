@@ -9,6 +9,20 @@ Fuente única de las aplicaciones que aparecen en el **menú de 9 puntos** de la
   `inicial`, `visibilidad` (`todos` | `personal`), `orden`.
 - **Implementación de referencia** sin dependencias: [`referencia/menu.js`](referencia/menu.js) +
   [`referencia/menu.css`](referencia/menu.css). Demostración: la raíz del sitio.
+- **Ruta versionada estable (la que cargan las apps):**
+  `https://ganemo-infra.github.io/menu-aplicaciones/v1/menu.js` y `.../v1/menu.css`. No existen en git: el
+  workflow de Pages copia `referencia/menu.js` y `referencia/menu.css` a `v1/` al publicar (fuente única, nunca
+  divergen). `referencia/` se mantiene publicada. Las apps cargan `v1/`; un cambio incompatible exigiría publicar
+  `v2/` y dejar `v1/` intacta.
+
+## Opción `credenciales`
+
+`GanemoMenu.montar({ ..., credenciales: "omit" })` se pasa a `fetch(urlLista, { credentials })`. Valores:
+`"omit"` (por defecto, como siempre), `"same-origin"` o `"include"`; cualquier otro valor se trata como `"omit"`.
+
+Motivo: apps como Glux sirven la lista filtrada por persona desde su propio servidor con sesión
+(`/_ganemo/aplicaciones.json`, mismo origen) y necesitan enviar la cookie. Con la URL pública de GitHub Pages se
+deja el valor por defecto.
 - **Guía completa** (especificación visual, recetas por tipo de app, reglas): Blenau
   `company/infra/menu-de-aplicaciones.md`.
 
