@@ -1,10 +1,7 @@
 {
   "version": 1,
   "actualizado": "2026-10-14",
-  "dominiosInternos": [
-    "ganemo.co",
-    "ganemo.com"
-  ],
+  "dominiosInternos": ["ganemo.co", "ganemo.com"],
   "apps": [
     {
       "id": "dashboards",
