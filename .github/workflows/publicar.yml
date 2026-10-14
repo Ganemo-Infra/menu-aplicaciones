@@ -24,6 +24,8 @@ jobs:
           mkdir -p _sitio
           cp -r v1 referencia _sitio/
           cp index.html _sitio/
+          # Ruta versionada estable: v1/menu.* se publica desde referencia/ (fuente unica, sin duplicados en git)
+          cp referencia/menu.js referencia/menu.css _sitio/v1/
           touch _sitio/.nojekyll
       - uses: actions/upload-pages-artifact@v3
         if: github.event_name != 'pull_request'

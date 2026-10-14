@@ -10,8 +10,13 @@
  *     correo: "ana@ganemo.co",          // usuario con sesión; sin sesión NO llamar a montar()
  *     appId: "dashboards",              // id de ESTA app en la lista (se resalta y abre en la misma pestaña)
  *     urlLista: "https://ganemo-infra.github.io/menu-aplicaciones/v1/aplicaciones.json", // opcional
- *     respaldo: {...}                   // opcional: copia embebida del JSON por si la URL no responde
+ *     respaldo: {...},                  // opcional: copia embebida del JSON por si la URL no responde
+ *     credenciales: "omit"              // opcional: "omit" (por defecto) | "same-origin" | "include"; ver abajo
  *   });
+ *
+ * credenciales: se pasa a fetch(urlLista, { credentials }). Con la URL pública déjalo en "omit". Si tu app sirve la
+ * lista filtrada por persona desde su propio servidor con sesión (p. ej. /_ganemo/aplicaciones.json, mismo origen),
+ * usa "same-origin" para enviar la cookie. Cualquier otro valor se trata como "omit".
  *
  * Reglas que cumple: todo con createElement/textContent (nunca innerHTML con datos); solo URLs https; visibilidad
  * 'personal' solo para dominios internos; si quedan menos de 2 apps visibles no pinta nada; caché de 10 min en
@@ -72,13 +77,16 @@
     return datos && datos.version === 1 && Array.isArray(datos.apps) ? datos : null;
   }
 
+  var CREDENCIALES = ["omit", "same-origin", "include"];
+
   /** Devuelve una promesa con la lista: caché fresca -> URL (3 s) -> caché vieja -> respaldo. */
-  function obtenerLista(urlLista, respaldo) {
+  function obtenerLista(urlLista, respaldo, credenciales) {
+    var modo = CREDENCIALES.indexOf(credenciales) >= 0 ? credenciales : "omit";
     var cache = leerCache();
     if (cache && Date.now() - cache.t < TTL_MS && valida(cache.datos)) return Promise.resolve(cache.datos);
     var ctl = global.AbortController ? new AbortController() : null;
     var reloj = ctl ? setTimeout(function () { ctl.abort(); }, 3000) : null;
-    return fetch(urlLista || URL_LISTA, { credentials: "omit", signal: ctl ? ctl.signal : undefined })
+    return fetch(urlLista || URL_LISTA, { credentials: modo, signal: ctl ? ctl.signal : undefined })
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (d) {
         clearTimeout(reloj);
@@ -176,7 +184,7 @@
   function montar(op) {
     op = op || {};
     if (!op.correo) return Promise.resolve(null);
-    return obtenerLista(op.urlLista, op.respaldo).then(function (datos) {
+    return obtenerLista(op.urlLista, op.respaldo, op.credenciales).then(function (datos) {
       if (!datos) return null;
       var apps = filtrar(datos, op.correo, op.appId);
       if (apps.length < 2) return null;
