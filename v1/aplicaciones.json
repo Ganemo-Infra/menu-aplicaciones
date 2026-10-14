@@ -1,15 +1,15 @@
 {
   "version": 1,
-  "actualizado": "2026-10-12",
+  "actualizado": "2026-10-14",
   "dominiosInternos": ["ganemo.co", "ganemo.com"],
   "apps": [
     {
       "id": "dashboards",
-      "nombre": "Dashboards",
-      "descripcion": "Tableros con IA sobre tus datos de Odoo",
+      "nombre": "GMach",
+      "descripcion": "Tableros y agentes con IA sobre tus datos de Odoo",
       "url": "https://dashboards.ganemo.com/",
       "color": "#1f6feb",
-      "inicial": "D",
+      "inicial": "G",
       "visibilidad": "personal",
       "orden": 10
     },
