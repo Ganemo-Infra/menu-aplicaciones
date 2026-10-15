@@ -7,7 +7,7 @@
       "id": "dashboards",
       "nombre": "Glux",
       "descripcion": "Tableros y agentes con IA sobre tus datos de Odoo",
-      "url": "https://dashboards.ganemo.com/",
+      "url": "https://glux.ganemo.com/",
       "color": "#1f6feb",
       "inicial": "G",
       "visibilidad": "personal",
