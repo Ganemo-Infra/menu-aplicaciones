@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "actualizado": "2026-10-14",
+  "actualizado": "2026-10-17",
   "dominiosInternos": ["ganemo.co", "ganemo.com"],
   "apps": [
     {
@@ -32,6 +32,26 @@
       "inicial": "H",
       "visibilidad": "personal",
       "orden": 30
+    },
+    {
+      "id": "mi-cuenta",
+      "nombre": "Mi cuenta",
+      "descripcion": "Tu cuenta y tus datos de Odoo",
+      "url": "https://www.ganemo.com/odoo/",
+      "color": "#6e40c9",
+      "inicial": "M",
+      "visibilidad": "todos",
+      "orden": 40
+    },
+    {
+      "id": "mis-instancias",
+      "nombre": "Mis instancias",
+      "descripcion": "Tus instancias de Odoo en Ganemo",
+      "url": "https://www.ganemo.com/saas/instances/",
+      "color": "#0b7285",
+      "inicial": "I",
+      "visibilidad": "todos",
+      "orden": 50
     }
   ]
 }
