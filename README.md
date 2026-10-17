@@ -26,6 +26,12 @@ deja el valor por defecto.
 - **Guía completa** (especificación visual, recetas por tipo de app, reglas): Blenau
   `company/infra/menu-de-aplicaciones.md`.
 
+## Opción `extras`
+
+`GanemoMenu.montar({ ..., extras: [{ texto: "Conectar como otro usuario…", url: "https://…/" }] })` añade enlaces
+propios de la app debajo de las aplicaciones, separados por una línea. Solo se aceptan URLs `https` y entradas con
+`texto`; lo demás se ignora. Sin `extras` el menú es igual que antes (las apps que no lo pasan no notan nada).
+
 ## Cambiar la lista
 
 1. PR que edite `v1/aplicaciones.json` (y `actualizado`). La CI corre `validar.py`: esquema, ids/orden/URL únicos,
