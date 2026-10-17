@@ -11,7 +11,8 @@
  *     appId: "dashboards",              // id de ESTA app en la lista (se resalta y abre en la misma pestaña)
  *     urlLista: "https://ganemo-infra.github.io/menu-aplicaciones/v1/aplicaciones.json", // opcional
  *     respaldo: {...},                  // opcional: copia embebida del JSON por si la URL no responde
- *     credenciales: "omit"              // opcional: "omit" (por defecto) | "same-origin" | "include"; ver abajo
+ *     credenciales: "omit",             // opcional: "omit" (por defecto) | "same-origin" | "include"; ver abajo
+ *     extras: [{texto: "Conectar como otro usuario…", url: "https://…/"}] // opcional: enlaces propios bajo una línea
  *   });
  *
  * credenciales: se pasa a fetch(urlLista, { credentials }). Con la URL pública déjalo en "omit". Si tu app sirve la
@@ -113,7 +114,23 @@
       .sort(function (x, y) { return (x.orden || 0) - (y.orden || 0); });
   }
 
-  function construir(apps, appId) {
+  /** Enlaces propios de la app debajo de las aplicaciones (opción `extras`). Solo https; se ignora lo demás. */
+  function pintarExtras(panel, extras) {
+    var validos = (Array.isArray(extras) ? extras : []).filter(function (x) {
+      return x && typeof x.texto === "string" && x.texto && /^https:\/\/[^\s"'<>]+$/.test(x.url);
+    });
+    if (!validos.length) return;
+    panel.appendChild(el("div", "ganemo-lanzador-separador"));
+    validos.forEach(function (x) {
+      var enlace = el("a", "ganemo-lanzador-extra", x.texto);
+      enlace.href = x.url;
+      enlace.target = "_blank";
+      enlace.rel = "noopener noreferrer";
+      panel.appendChild(enlace);
+    });
+  }
+
+  function construir(apps, appId, extras) {
     var n = ++contador;
     var cont = el("div", "ganemo-lanzador");
     var boton = el("button", "ganemo-lanzador-boton");
@@ -151,6 +168,7 @@
       grilla.appendChild(enlace);
     });
     panel.appendChild(grilla);
+    pintarExtras(panel, extras);
 
     function abrir(si, devolverFoco, conTeclado) {
       panel.hidden = !si;
@@ -188,7 +206,7 @@
       if (!datos) return null;
       var apps = filtrar(datos, op.correo, op.appId);
       if (apps.length < 2) return null;
-      var cont = construir(apps, op.appId);
+      var cont = construir(apps, op.appId, op.extras);
       if (op.contenedor) {
         op.contenedor.insertBefore(cont, op.contenedor.firstChild);
       } else {

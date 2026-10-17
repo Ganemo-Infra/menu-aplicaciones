@@ -46,6 +46,13 @@
   width: 40px; height: 40px; border-radius: 10px; display: grid; place-items: center; color: #fff;
   font-weight: 600; font-size: 18px; background: #5d6875;
 }
+.ganemo-lanzador-separador { height: 1px; margin: 10px 4px 8px; background: var(--ganemo-menu-borde); }
+.ganemo-lanzador-extra {
+  display: block; padding: 8px 10px; border-radius: 8px; color: var(--ganemo-menu-texto) !important;
+  text-decoration: none !important; font-size: 13px;
+}
+.ganemo-lanzador-extra:hover { background: var(--ganemo-menu-hover); }
+.ganemo-lanzador-extra:focus-visible { outline: 2px solid var(--ganemo-menu-foco); outline-offset: 2px; }
 @media (max-width: 480px) {
   .ganemo-lanzador-panel { position: fixed; left: 16px; right: 16px; top: 56px; width: auto; max-width: none; }
   .ganemo-lanzador.flotante .ganemo-lanzador-panel { top: auto; bottom: 64px; }
